@@ -1,0 +1,50 @@
+# Name of USB port for zlac8015d
+port: /dev/ttyUSB0
+
+# Tire & Encoder Parameters
+# Default: 8 inches wheel
+###############################
+# Tire circumference
+travel_in_one_rev: 0.655 # meter
+# Tire radius
+R_Wheel: 0.105 # meter
+# Encoder CPR(counts per revolution)
+cpr: 16385
+###############################
+
+# Distance between tires
+wheels_base_width: 0.440 # meter
+# Control mode
+# 1: relative position control mode
+# Subscribe to "/zlac8015d/pos/cmd_deg" and "/zlac8015d/pos/cmd_dist"
+# 3: Speed rpm control mode
+# Subscribe to "/zlac8015d/twist/cmd_vel", "/zlac8015d/vel/cmd_vel" and "/zlac8015d/vel/cmd_rpm"
+control_mode: 3
+# Motor automatically stops if no topics are received for a certain period of time
+callback_timeout: 0.5 # seconds
+# Smaller values will cause small changes in tire motion to have a greater impact on the odometry calculations
+# 0.01 or 0.001 is highly recommended
+decimil_coefficient: 0.001
+
+# Time to reach target position
+set_accel_time_left: 200 # ms
+set_accel_time_right: 200 # ms
+set_decel_time_left: 200 # ms
+set_decel_time_right: 200 # ms
+
+# Maximum rpm
+max_left_rpm: 150
+max_right_rpm: 150
+# Width of rpm to be regarded as 0
+# If 3, then -3 to 3 is considered rpm 0
+deadband_rpm: 3
+
+# Header flame of TF
+TF_header_flame: odom
+# Child flame of TF
+TF_child_flame: base_link
+
+# Header flame of odom
+odom_header_flame: odom
+# Child flame of odom
+odom_child_flame: base_link
