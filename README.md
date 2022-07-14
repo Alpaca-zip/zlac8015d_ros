@@ -37,10 +37,10 @@ $ rosrun zlac8015d_ros motor_driver_node.py
 - `max_left_rpm`: Maximum rpm of left tire. Default is `150`.
 - `max_right_rpm`: Maximum rpm of right tire. Default is `150`.
 - `deadband_rpm`: Width of rpm to be regarded as 0. If `3`, then -3 to 3 is considered rpm 0. Default is `3`.
-- `TF_header_flame`: Header flame of TF. Default is `odom`.
-- `TF_child_flame`: Child flame of TF. Default is `base_link`.
-- `odom_header_flame`: Header flame of odom. Default is `odom`.
-- `odom_child_flame`: Child flame of odom. Default is `base_link`.
+- `TF_header_frame`: Header frame of TF. Default is `odom`.
+- `TF_child_frame`: Child frame of TF. Default is `base_link`.
+- `odom_header_frame`: Header frame of odom. Default is `odom`.
+- `odom_child_frame`: Child frame of odom. Default is `base_link`.
 
 ### Topics
 This node publishes the following topics.
