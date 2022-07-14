@@ -39,12 +39,12 @@ max_right_rpm: 150
 # If 3, then -3 to 3 is considered rpm 0
 deadband_rpm: 3
 
-# Header flame of TF
-TF_header_flame: odom
-# Child flame of TF
-TF_child_flame: base_link
+# Header frame of TF
+TF_header_frame: odom
+# Child frame of TF
+TF_child_frame: base_link
 
-# Header flame of odom
-odom_header_flame: odom
-# Child flame of odom
-odom_child_flame: base_link
+# Header frame of odom
+odom_header_frame: odom
+# Child frame of odom
+odom_child_frame: base_link

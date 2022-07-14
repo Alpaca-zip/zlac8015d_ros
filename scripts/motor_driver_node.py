@@ -93,7 +93,7 @@ class MotorDriverNode:
 		self.linear_vel_cmd = msg.linear.x
 		self.angular_vel_cmd = msg.angular.z
 		self.got_twist_cmd = True
-		self.last_subscribed_time = rospy.Time.now().nsecs
+		self.last_subscribed_time = time.perf_counter()
 	
 	"""
 	++++++++++++++++++++++++++++++++++++++++++
@@ -225,9 +225,8 @@ class MotorDriverNode:
 			vl = (self.l_meter - self.prev_l_meter) / self.period
 			vr = (self.r_meter - self.prev_r_meter) / self.period
 		
-		round_vl = float(Decimal(str(vl)).quantize(Decimal(self.obj["decimil_coefficient"]), rounding = ROUND_HALF_UP))
-		round_vr = float(Decimal(str(vr)).quantize(Decimal('0.001'), rounding = ROUND_HALF_UP))
-        self.obj["TF_header_flame"]
+		round_vl = float(Decimal(str(vl)).quantize(Decimal(str(self.obj["decimil_coefficient"])), rounding = ROUND_HALF_UP))
+		round_vr = float(Decimal(str(vr)).quantize(Decimal(str(self.obj["decimil_coefficient"])), rounding = ROUND_HALF_UP))
 	
 		#-----Rotatiing-----
 		if ((round_vl * round_vr) < 0.0) and (abs(round_vl) == abs(round_vr)):
@@ -257,8 +256,8 @@ class MotorDriverNode:
 		#-----Construct tf-----
 		q = quaternion_from_euler(0, 0, self.theta)
 		self.t.header.stamp = rospy.Time.now()
-		self.t.header.frame_id = self.obj["TF_header_flame"]
-		self.t.child_frame_id = self.obj["TF_child_flame"]
+		self.t.header.frame_id = self.obj["TF_header_frame"]
+		self.t.child_frame_id = self.obj["TF_child_frame"]
 		self.t.transform.translation.x = self.x
 		self.t.transform.translation.y = self.y
 		self.t.transform.translation.z = 0.0
@@ -270,8 +269,8 @@ class MotorDriverNode:
 
 		#-----Construct odom message-----
 		self.odom_msg.header.stamp = rospy.Time.now()
-		self.odom_msg.header.frame_id = self.obj["odom_header_flame"]
-		self.odom_msg.child_frame_id = self.obj["odom_child_flame"]
+		self.odom_msg.header.frame_id = self.obj["odom_header_frame"]
+		self.odom_msg.child_frame_id = self.obj["odom_child_frame"]
 		self.odom_msg.pose.pose.position.x = self.x
 		self.odom_msg.pose.pose.position.y = self.y
 		self.odom_msg.pose.pose.position.z = 0.0
